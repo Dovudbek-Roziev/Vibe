@@ -34,25 +34,38 @@ export default function AdminPosts() {
 
   return (
     <div>
-      <h1 className="text-2xl font-bold mb-6">Postlar</h1>
-      {loading ? <div className="flex justify-center py-10"><Spinner size={7} /></div> : (
+      <h1 className="text-xl md:text-2xl font-bold mb-4 md:mb-6">Postlar</h1>
+      {loading ? (
+        <div className="flex justify-center py-10"><Spinner size={7} /></div>
+      ) : (
         <div className="bg-white dark:bg-gray-900 rounded-2xl border border-gray-100 dark:border-gray-800 overflow-hidden">
           {posts.map(post => (
-            <div key={post._id} className="flex items-center gap-3 px-4 py-3 border-b border-gray-100 dark:border-gray-800 last:border-0">
+            <div key={post._id} className="flex items-center gap-3 px-3 py-3 md:px-4 border-b border-gray-100 dark:border-gray-800 last:border-0">
+              {/* Thumbnail */}
               {post.media?.[0] ? (
-                <img src={post.media[0].url} alt="" className="w-14 h-14 object-cover rounded-xl flex-shrink-0" />
+                <img src={post.media[0].url} alt="" className="w-12 h-12 md:w-14 md:h-14 object-cover rounded-xl shrink-0" />
               ) : (
-                <div className="w-14 h-14 bg-gray-100 dark:bg-gray-800 rounded-xl flex-shrink-0" />
+                <div className="w-12 h-12 md:w-14 md:h-14 bg-gray-100 dark:bg-gray-800 rounded-xl shrink-0" />
               )}
+
+              {/* Info */}
               <div className="flex-1 min-w-0">
-                <p className="text-sm font-semibold truncate">@{post.author?.username}</p>
-                <p className="text-xs text-gray-500 truncate">{post.caption || '(sarlavha yo\'q)'}</p>
-                <p className="text-xs text-gray-400">{post.likes?.length || 0} like · {new Date(post.createdAt).toLocaleDateString('uz-UZ')}</p>
+                <div className="flex items-center gap-1.5">
+                  <p className="text-sm font-semibold truncate">@{post.author?.username}</p>
+                  {/* Status dot — mobile */}
+                  <span className={`md:hidden w-2 h-2 rounded-full shrink-0 ${post.isHidden ? 'bg-yellow-400' : 'bg-green-400'}`} />
+                </div>
+                <p className="text-xs text-gray-500 truncate">{post.caption || '—'}</p>
+                <p className="text-xs text-gray-400">{post.likes?.length || 0} like · {new Date(post.createdAt).toLocaleDateString('ru-RU', { day: '2-digit', month: 'short' })}</p>
               </div>
-              <span className={`text-xs px-2 py-0.5 rounded-full flex-shrink-0 ${post.isHidden ? 'bg-yellow-100 text-yellow-600' : 'bg-green-100 text-green-600'}`}>
-                {post.isHidden ? 'Yashirin' : 'Ko\'rinadigan'}
+
+              {/* Status badge — desktop only */}
+              <span className={`hidden md:inline-flex text-xs px-2 py-0.5 rounded-full shrink-0 ${post.isHidden ? 'bg-yellow-100 text-yellow-600 dark:bg-yellow-500/20 dark:text-yellow-400' : 'bg-green-100 text-green-600 dark:bg-green-500/20 dark:text-green-400'}`}>
+                {post.isHidden ? 'Yashirin' : "Ko'rinadigan"}
               </span>
-              <div className="flex gap-1">
+
+              {/* Actions */}
+              <div className="flex gap-0.5 shrink-0">
                 <Link to={`/posts/${post._id}`} className="p-2 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-lg transition-colors">
                   <Eye size={16} className="text-gray-500" />
                 </Link>

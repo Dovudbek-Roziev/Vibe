@@ -34,35 +34,66 @@ export default function AdminUsers() {
 
   return (
     <div>
-      <h1 className="text-2xl font-bold mb-6">Foydalanuvchilar</h1>
+      <h1 className="text-xl md:text-2xl font-bold mb-4 md:mb-6">Foydalanuvchilar</h1>
+
       <div className="relative mb-4">
         <Search size={16} className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" />
-        <input className="input-field pl-9" placeholder="Qidirish..." value={query} onChange={e => setQuery(e.target.value)} />
+        <input
+          className="input-field pl-9"
+          placeholder="Qidirish..."
+          value={query}
+          onChange={e => setQuery(e.target.value)}
+        />
       </div>
 
-      {loading ? <div className="flex justify-center py-10"><Spinner size={7} /></div> : (
+      {loading ? (
+        <div className="flex justify-center py-10"><Spinner size={7} /></div>
+      ) : (
         <div className="bg-white dark:bg-gray-900 rounded-2xl border border-gray-100 dark:border-gray-800 overflow-hidden">
           {users.map(u => (
-            <div key={u._id} className="flex items-center gap-3 px-4 py-3 border-b border-gray-100 dark:border-gray-800 last:border-0">
+            <div key={u._id} className="flex items-center gap-3 px-3 py-3 md:px-4 border-b border-gray-100 dark:border-gray-800 last:border-0">
               <Avatar src={u.avatar} username={u.username} size={10} />
+
               <div className="flex-1 min-w-0">
-                <p className="font-semibold text-sm">{u.username}</p>
-                <p className="text-xs text-gray-500">{u.email} · {new Date(u.createdAt).toLocaleDateString('uz-UZ')}</p>
+                <div className="flex items-center gap-1.5">
+                  <p className="font-semibold text-sm truncate">{u.username}</p>
+                  {/* Role badge */}
+                  {u.role === 'admin' && (
+                    <span className="text-[10px] bg-purple-100 dark:bg-purple-500/20 text-purple-600 dark:text-purple-400 px-1.5 py-0.5 rounded-full font-medium shrink-0">
+                      Admin
+                    </span>
+                  )}
+                </div>
+                {/* Email — hidden on very small screens */}
+                <p className="text-xs text-gray-500 truncate hidden xs:block">{u.email}</p>
+                <p className="text-xs text-gray-400">{new Date(u.createdAt).toLocaleDateString('ru-RU', { day: '2-digit', month: 'short', year: '2-digit' })}</p>
               </div>
-              <span className={`text-xs px-2 py-0.5 rounded-full ${u.isBlocked ? 'bg-red-100 text-red-600' : 'bg-green-100 text-green-600'}`}>
-                {u.isBlocked ? 'Bloklangan' : 'Faol'}
+
+              <span className={`text-xs px-2 py-0.5 rounded-full shrink-0 font-medium ${
+                u.isBlocked
+                  ? 'bg-red-100 text-red-600 dark:bg-red-500/20 dark:text-red-400'
+                  : 'bg-green-100 text-green-600 dark:bg-green-500/20 dark:text-green-400'
+              }`}>
+                {u.isBlocked ? 'Blok' : 'Faol'}
               </span>
+
               <button
                 onClick={() => toggleBlock(u._id, u.isBlocked)}
-                className="p-2 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-lg transition-colors"
+                className="p-2 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-lg transition-colors shrink-0"
                 title={u.isBlocked ? 'Blokdan chiqarish' : 'Bloklash'}
               >
-                {u.isBlocked ? <Shield size={18} className="text-green-500" /> : <ShieldOff size={18} className="text-red-500" />}
+                {u.isBlocked
+                  ? <Shield size={18} className="text-green-500" />
+                  : <ShieldOff size={18} className="text-red-500" />
+                }
               </button>
             </div>
           ))}
           {hasMore && (
-            <button onClick={() => fetchUsers(page + 1, query)} className="w-full py-3 text-sm text-gray-500 hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors">
+            <button
+              onClick={() => fetchUsers(page + 1, query)}
+              className="w-full py-3 text-sm text-gray-500 hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors"
+            >
               Ko'proq yuklash
             </button>
           )}
