@@ -78,6 +78,11 @@ body {
            rounded-2xl transition-all duration-200 hover:bg-gray-50 dark:hover:bg-gray-900/60
            active:scale-[0.97] select-none;
   }
+  .btn-secondary {
+    @apply bg-gray-100 dark:bg-white/10 text-black dark:text-white font-semibold py-2 px-4
+           rounded-xl transition-all duration-200 hover:bg-gray-200 dark:hover:bg-white/15
+           active:scale-[0.97] select-none flex items-center justify-center gap-1.5;
+  }
   .input-field {
     @apply w-full bg-gray-50 dark:bg-white/5 text-black dark:text-white
            border-2 border-gray-100 dark:border-white/10 rounded-2xl px-4 py-3 text-sm

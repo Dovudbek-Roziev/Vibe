@@ -41,9 +41,9 @@ function ReelItem({ reel, isActive }) {
       {/* Mute button */}
       <button
         onClick={() => setMuted(m => !m)}
-        className="absolute top-4 right-4 bg-black/40 text-white rounded-full p-2"
+        className="absolute top-4 right-4 bg-black/60 backdrop-blur text-white rounded-full p-2.5 border border-white/20 shadow-lg"
       >
-        {muted ? <VolumeX size={20} /> : <Volume2 size={20} />}
+        {muted ? <VolumeX size={22} /> : <Volume2 size={22} />}
       </button>
 
       {/* Right actions */}

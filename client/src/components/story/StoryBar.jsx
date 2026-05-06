@@ -1,5 +1,5 @@
 import { useEffect, useState, useRef } from 'react';
-import { Plus, X, ChevronLeft, ChevronRight } from 'lucide-react';
+import { Plus, X, ChevronLeft, ChevronRight, VolumeX, Volume2 } from 'lucide-react';
 import { useAuthStore } from '../../store/authStore';
 import api from '../../services/api';
 import toast from 'react-hot-toast';
@@ -11,6 +11,7 @@ export default function StoryBar() {
   const [activeGroup, setActiveGroup] = useState(null);
   const [activeIdx, setActiveIdx] = useState(0);
   const [progress, setProgress] = useState(0);
+  const [muted, setMuted] = useState(true);
   const fileRef = useRef();
   const timerRef = useRef();
 
@@ -130,13 +131,18 @@ export default function StoryBar() {
               <img src={activeGroup.user.avatar || `https://ui-avatars.com/api/?name=${activeGroup.user.username}`} className="w-9 h-9 rounded-full object-cover" alt="" />
               <span className="text-white font-semibold text-sm">{activeGroup.user.username}</span>
             </div>
-            <button onClick={closeStory} className="absolute top-8 right-4 z-10 text-white">
-              <X size={24} />
-            </button>
+            <div className="absolute top-8 right-4 z-10 flex items-center gap-3">
+              <button onClick={() => setMuted(m => !m)} className="text-white">
+                {muted ? <VolumeX size={22} /> : <Volume2 size={22} />}
+              </button>
+              <button onClick={closeStory} className="text-white">
+                <X size={24} />
+              </button>
+            </div>
 
             {/* Media */}
             {activeGroup.stories[activeIdx]?.media.type === 'video' ? (
-              <video src={activeGroup.stories[activeIdx].media.url} className="max-h-screen max-w-full object-contain" autoPlay muted />
+              <video src={activeGroup.stories[activeIdx].media.url} className="max-h-screen max-w-full object-contain" autoPlay playsInline muted={muted} />
             ) : (
               <img src={activeGroup.stories[activeIdx]?.media.url} className="max-h-screen max-w-full object-contain" alt="" />
             )}
