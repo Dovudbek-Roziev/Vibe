@@ -5,7 +5,7 @@ import i18n from '../i18n';
 export const useLangStore = create(
   persist(
     (set) => ({
-      lang: 'uz',
+      lang: 'ru',
       setLang: (lang) => {
         i18n.changeLanguage(lang);
         set({ lang });

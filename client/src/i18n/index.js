@@ -138,9 +138,9 @@ const ru = {
 i18n.use(initReactI18next).init({
   resources: { uz, ru },
   lng: localStorage.getItem('lang-storage')
-    ? JSON.parse(localStorage.getItem('lang-storage'))?.state?.lang || 'uz'
-    : 'uz',
-  fallbackLng: 'uz',
+    ? JSON.parse(localStorage.getItem('lang-storage'))?.state?.lang || 'ru'
+    : 'ru',
+  fallbackLng: 'ru',
   interpolation: { escapeValue: false },
 });
 
