@@ -1,0 +1,95 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,300;0,14..32,400;0,14..32,500;0,14..32,600;0,14..32,700;0,14..32,800;0,14..32,900&display=swap');
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: 'Inter', system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Thin scrollbar */
+::-webkit-scrollbar { width: 3px; height: 3px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: #d1d5db; border-radius: 10px; }
+.dark ::-webkit-scrollbar-thumb { background: #2d3748; }
+
+/* Reels snap scroll */
+.reel-container {
+  scroll-snap-type: y mandatory;
+  overflow-y: scroll;
+  height: 100vh;
+}
+.reel-item { scroll-snap-align: start; height: 100vh; }
+
+/* Story ring */
+.story-ring {
+  background: linear-gradient(135deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+  padding: 2.5px;
+  border-radius: 50%;
+}
+
+/* Glassmorphism */
+.glass {
+  background: rgba(255, 255, 255, 0.75);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid rgba(255, 255, 255, 0.45);
+}
+.dark .glass {
+  background: rgba(10, 10, 10, 0.75);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+}
+
+/* Skeleton shimmer */
+.skeleton {
+  background: linear-gradient(90deg, #f3f4f6 25%, #e5e7eb 50%, #f3f4f6 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.6s infinite linear;
+}
+.dark .skeleton {
+  background: linear-gradient(90deg, #1a1a2e 25%, #16213e 50%, #1a1a2e 75%);
+  background-size: 200% 100%;
+}
+
+/* Gradient text utility */
+.text-gradient {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Safe area padding for iOS */
+.pb-safe { padding-bottom: env(safe-area-inset-bottom, 0px); }
+
+@layer components {
+  .btn-primary {
+    @apply bg-black text-white dark:bg-white dark:text-black font-semibold py-3 px-6 rounded-2xl
+           transition-all duration-200 hover:opacity-85 active:scale-[0.97] disabled:opacity-40
+           flex items-center justify-center gap-2 select-none;
+  }
+  .btn-outline {
+    @apply border-2 border-gray-200 dark:border-gray-800 text-black dark:text-white font-semibold py-3 px-6
+           rounded-2xl transition-all duration-200 hover:bg-gray-50 dark:hover:bg-gray-900/60
+           active:scale-[0.97] select-none;
+  }
+  .input-field {
+    @apply w-full bg-gray-50 dark:bg-white/5 text-black dark:text-white
+           border-2 border-gray-100 dark:border-white/10 rounded-2xl px-4 py-3 text-sm
+           focus:outline-none focus:border-black dark:focus:border-white
+           transition-all duration-200 placeholder:text-gray-400 dark:placeholder:text-gray-600;
+  }
+  .card {
+    @apply bg-white dark:bg-zinc-950 border border-gray-100 dark:border-white/[0.06] rounded-3xl;
+  }
+  .icon-btn {
+    @apply flex items-center justify-center w-10 h-10 rounded-xl transition-all duration-150
+           text-gray-500 hover:text-black dark:hover:text-white
+           hover:bg-gray-100 dark:hover:bg-white/8 active:scale-90;
+  }
+}
