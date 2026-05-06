@@ -17,6 +17,7 @@ const chatRoutes = require('./routes/chat');
 const notificationRoutes = require('./routes/notifications');
 const adminRoutes = require('./routes/admin');
 const storyRoutes = require('./routes/stories');
+const feedbackRoutes = require('./routes/feedback');
 
 connectDB();
 
@@ -44,6 +45,7 @@ app.use('/api/chat', chatRoutes);
 app.use('/api/notifications', notificationRoutes);
 app.use('/api/admin', adminRoutes);
 app.use('/api/stories', storyRoutes);
+app.use('/api/feedback', feedbackRoutes);
 
 app.get('/api/health', (req, res) => res.json({ status: 'OK' }));
 

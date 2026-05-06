@@ -1,12 +1,14 @@
+import { useState } from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { useAuthStore } from '../../store/authStore';
 import { useThemeStore } from '../../store/themeStore';
 import { useLangStore } from '../../store/langStore';
 import Footer from '../common/Footer';
+import ReportProblemModal from '../common/ReportProblemModal';
 import {
   Home, Search, Film, MessageCircle, Bell, User,
-  Sun, Moon, LogOut, Shield
+  Sun, Moon, LogOut, Shield, AlertCircle
 } from 'lucide-react';
 
 const NavItem = ({ to, icon: Icon, label }) => (
@@ -32,6 +34,7 @@ export default function Sidebar() {
   const { theme, toggleTheme } = useThemeStore();
   const { lang, setLang } = useLangStore();
   const navigate = useNavigate();
+  const [showReport, setShowReport] = useState(false);
 
   const handleLogout = () => { logout(); navigate('/login'); };
 
@@ -90,9 +93,19 @@ export default function Sidebar() {
             <LogOut size={17} />
           </button>
         </div>
+
+        <button
+          onClick={() => setShowReport(true)}
+          className="flex items-center gap-3.5 px-4 py-3 w-full rounded-2xl text-sm text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-white/8 hover:text-black dark:hover:text-white transition-all"
+        >
+          <AlertCircle size={20} strokeWidth={1.9} />
+          <span className="hidden xl:block">{t('reportProblem')}</span>
+        </button>
       </div>
 
       <Footer className="pt-3 hidden xl:block" />
+
+      <ReportProblemModal open={showReport} onClose={() => setShowReport(false)} />
     </div>
   );
 }

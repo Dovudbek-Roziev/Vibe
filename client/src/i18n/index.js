@@ -65,6 +65,18 @@ const uz = {
     passwordMin: 'Parol kamida 6 ta belgi',
     // Footer
     footerAuthor: 'Muallif',
+    // Feedback
+    reportProblem: 'Muammo haqida xabar',
+    reportSubtitle: 'Adminga xabar yuboring',
+    feedback_bug: 'Xatolik',
+    feedback_suggestion: 'Taklif',
+    feedback_complaint: 'Shikoyat',
+    feedback_other: 'Boshqa',
+    feedbackPlaceholder: "Nima bo'ldi? Batafsil yozing...",
+    feedbackSent: 'Xabaringiz yuborildi!',
+    feedbackSentSub: 'Admin tez orada ko\'rib chiqadi',
+    allFeedbacks: 'Barcha xabarlar',
+    errorGeneric: 'Xatolik yuz berdi',
   },
 };
 
@@ -132,6 +144,18 @@ const ru = {
     passwordMin: 'Пароль минимум 6 символов',
     // Footer
     footerAuthor: 'Автор',
+    // Feedback
+    reportProblem: 'Сообщить о проблеме',
+    reportSubtitle: 'Написать администратору',
+    feedback_bug: 'Ошибка',
+    feedback_suggestion: 'Предложение',
+    feedback_complaint: 'Жалоба',
+    feedback_other: 'Другое',
+    feedbackPlaceholder: 'Что произошло? Опишите подробно...',
+    feedbackSent: 'Сообщение отправлено!',
+    feedbackSentSub: 'Администратор скоро рассмотрит',
+    allFeedbacks: 'Все сообщения',
+    errorGeneric: 'Произошла ошибка',
   },
 };
 

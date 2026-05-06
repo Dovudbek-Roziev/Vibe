@@ -1,7 +1,7 @@
 import { Outlet, NavLink, useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { useAuthStore } from '../../store/authStore';
-import { LayoutDashboard, Users, FileText, Flag, LogOut, ArrowLeft } from 'lucide-react';
+import { LayoutDashboard, Users, FileText, Flag, MessageSquareWarning, LogOut, ArrowLeft } from 'lucide-react';
 
 const AdminNavItem = ({ to, icon: Icon, label }) => (
   <NavLink
@@ -36,6 +36,7 @@ export default function AdminLayout() {
           <AdminNavItem to="/admin/users" icon={Users} label={t('totalUsers')} />
           <AdminNavItem to="/admin/posts" icon={FileText} label={t('totalPosts')} />
           <AdminNavItem to="/admin/reports" icon={Flag} label={t('reports')} />
+          <AdminNavItem to="/admin/feedback" icon={MessageSquareWarning} label={t('allFeedbacks')} />
         </nav>
 
         <div className="space-y-2 pt-4 border-t border-gray-200 dark:border-gray-800">

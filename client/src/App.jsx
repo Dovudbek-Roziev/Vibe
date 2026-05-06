@@ -18,6 +18,7 @@ import AdminDashboard from './pages/admin/Dashboard';
 import AdminUsers from './pages/admin/Users';
 import AdminPosts from './pages/admin/Posts';
 import AdminReports from './pages/admin/Reports';
+import AdminFeedback from './pages/admin/Feedback';
 
 import MainLayout from './components/layout/MainLayout';
 import AdminLayout from './components/layout/AdminLayout';
@@ -66,6 +67,7 @@ export default function App() {
             <Route path="users" element={<AdminUsers />} />
             <Route path="posts" element={<AdminPosts />} />
             <Route path="reports" element={<AdminReports />} />
+            <Route path="feedback" element={<AdminFeedback />} />
           </Route>
 
           <Route path="*" element={<Navigate to="/" replace />} />

@@ -5,9 +5,10 @@ import { useThemeStore } from '../../store/themeStore';
 import { useLangStore } from '../../store/langStore';
 import { useTranslation } from 'react-i18next';
 import { AnimatePresence, motion } from 'framer-motion';
+import ReportProblemModal from '../common/ReportProblemModal';
 import {
   Home, Search, Film, MessageCircle, User,
-  MoreHorizontal, Sun, Moon, Shield, LogOut, X
+  MoreHorizontal, Sun, Moon, Shield, LogOut, X, AlertCircle
 } from 'lucide-react';
 
 export default function MobileNav() {
@@ -17,6 +18,7 @@ export default function MobileNav() {
   const { t } = useTranslation();
   const navigate = useNavigate();
   const [open, setOpen] = useState(false);
+  const [showReport, setShowReport] = useState(false);
 
   const items = [
     { to: '/', icon: Home },
@@ -131,6 +133,15 @@ export default function MobileNav() {
                   </NavLink>
                 )}
 
+                {/* Report problem */}
+                <button
+                  onClick={() => { setOpen(false); setTimeout(() => setShowReport(true), 300); }}
+                  className="flex items-center gap-4 w-full px-4 py-3.5 rounded-2xl hover:bg-gray-100 dark:hover:bg-white/8 transition-colors"
+                >
+                  <AlertCircle size={22} className="text-orange-500" />
+                  <span className="font-medium text-sm">{t('reportProblem')}</span>
+                </button>
+
                 <div className="h-px bg-gray-100 dark:bg-white/8 my-1" />
 
                 {/* Logout */}
@@ -146,6 +157,8 @@ export default function MobileNav() {
           </>
         )}
       </AnimatePresence>
+
+      <ReportProblemModal open={showReport} onClose={() => setShowReport(false)} />
     </>
   );
 }
